@@ -1,62 +1,55 @@
-import javax.imageio.ImageIO;
+/* Developers details:
+   - Karin Ochayon, 207797002
+   - Dor Uzan, 205890510
+*/
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ChatApp {
+
+    // Represents the main frame of the application, which is a window that contains all the graphical components of the user interface
     private JFrame mainFrame;
+    // Represents an instance of the BackgroundPanel class, which is a custom panel that displays a background image
     private BackgroundPanel backgroundPanel;
 
+    // Represents an instance of the ChatPage class. It is used to refer to the chat page panel that is displayed when the user clicks the "Start" button
+    private ChatPage chatPage;
+
     public ChatApp() {
+
+        // Set mainFrame style
         mainFrame = new JFrame("Welcome To ChitChat App 😊");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(500, 600);
         mainFrame.setLayout(new BorderLayout());
         mainFrame.setResizable(false); // Disable window resizing
-
-        backgroundPanel = new BackgroundPanel("images/background.png");
+        backgroundPanel = new BackgroundPanel("images/background.png"); // Creating background (the image will be the background)
         mainFrame.add(backgroundPanel);
 
+        // Creating "Start" button
         JButton startButton = new JButton("Start");
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openChatPage();
-            }
-        });
+        startButton.addActionListener(e -> openChatPage()); // When the user clicks on "Start" transfer him to the actual chat page
 
-        // Set button styles
-        startButton.setBackground(new Color(120, 8, 247)); // Set a custom background color
-        startButton.setForeground(Color.WHITE); // Set the foreground color (text color)
+        // Set "Start" button styles
+        startButton.setBackground(new Color(120, 8, 247)); // Set a custom background color (purple)
+        startButton.setForeground(Color.WHITE); // Set the foreground color (text color = white)
         startButton.setFont(new Font("Arial", Font.BOLD, 14)); // Set the font
-
-        // Increase the button size
-        startButton.setPreferredSize(new Dimension(150, 50));
-
-
-        // Set button padding
-        int padding = 20;
+        startButton.setPreferredSize(new Dimension(150, 50)); // Increase the button size
+        int padding = 20; // Set button padding
         startButton.setBorder(new EmptyBorder(padding, padding, padding, padding));
-
-
-        // Change button background color on hover
-        Color originalColor = startButton.getBackground();
+        Color originalColor = startButton.getBackground(); // Change button background color on hover
         Color hoverColor = new Color(252, 220, 229); // Pink color
-        startButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
+        startButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 startButton.setBackground(hoverColor);
             }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 startButton.setBackground(originalColor);
             }
         });
@@ -73,130 +66,48 @@ public class ChatApp {
         mainFrame.setVisible(true);
     }
 
+
+    // This function is responsable for the actual chat page
     private void openChatPage() {
+        // Remove all the components from the content pane of the mainFrame JFrame
         mainFrame.getContentPane().removeAll();
+        // Resize the window
         mainFrame.setSize(800, 800);
-
-        // Create the chat page components
-        JPanel chatPanel = new JPanel(new BorderLayout());
-        chatPanel.setBackground(Color.WHITE); // Set background color
-
-        // Top Panel: Server, Port, Connect, Disconnect, and Title
-        JPanel topPanel = new JPanel(new BorderLayout());
-//        topPanel.setBackground(new Color(220, 220, 220)); // Set background color
-        topPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-
-        // Title Image
-        ImageIcon titleIcon = new ImageIcon(getClass().getResource("images/title.png"));
-        JLabel titleLabel = new JLabel(titleIcon);
-
-        // Server, Port, Connect, and Disconnect
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-//        buttonPanel.setBackground(new Color(220, 220, 220)); // Set background color
-
-        buttonPanel.setBackground(Color.white);
-
-        JLabel serverLabel = new JLabel("Server:");
-        JTextField serverField = new JTextField(10);
-        serverField.setBackground(Color.white);
-
-        JLabel portLabel = new JLabel("Port:");
-        JTextField portField = new JTextField(10);
-        portField.setBackground(Color.white);
-
-        JButton connectButton = new JButton("Connect");
-        connectButton.setBackground(new Color(120, 9, 247)); // Set background color
-        connectButton.setForeground(Color.WHITE); // Set text color
-        connectButton.setFont(new Font("Arial", Font.BOLD, 14)); // Set font
-        connectButton.setEnabled(false);
-
-        JButton disconnectButton = new JButton("Disconnect");
-        disconnectButton.setBackground(new Color(120, 9, 247)); // Set background color
-        disconnectButton.setForeground(Color.WHITE); // Set text color
-        disconnectButton.setFont(new Font("Arial", Font.BOLD, 14)); // Set font
-        disconnectButton.setEnabled(false);
-
-        buttonPanel.add(serverLabel);
-        buttonPanel.add(serverField);
-        buttonPanel.add(portLabel);
-        buttonPanel.add(portField);
-        buttonPanel.add(connectButton);
-        buttonPanel.add(disconnectButton);
-
-        topPanel.add(titleLabel, BorderLayout.NORTH);
-        topPanel.add(buttonPanel, BorderLayout.CENTER);
-        topPanel.setBackground(Color.white);
-
-        // Middle Panel: Chat Messages
-        JTextArea chatMessagesArea = new JTextArea();
-        chatMessagesArea.setEditable(false);
-
-        chatMessagesArea.setBackground(Color.WHITE); // Set background color
-        chatMessagesArea.setFont(new Font("Arial", Font.PLAIN, 14)); // Set font
-        JScrollPane chatScrollPane = new JScrollPane(chatMessagesArea);
-
-        // Bottom Panel: User Input, Recipient ComboBox, and Send Button
-        JPanel bottomPanel = new JPanel(new BorderLayout());
-//        bottomPanel.setBackground(new Color(220, 220, 220)); // Set background color
-        bottomPanel.setBorder(new EmptyBorder(10, 20, 20, 20));
-
-        JTextField userInputField = new JTextField();
-        userInputField.setPreferredSize(new Dimension(400, 30)); // Set preferred size
-
-        JComboBox<String> recipientComboBox = new JComboBox<>();
-        recipientComboBox.setPreferredSize(new Dimension(120, 30)); // Set preferred size
-        recipientComboBox.setBackground(Color.white);
-
-        JButton sendButton = new JButton("Send");
-        sendButton.setBackground(new Color(120, 9, 247)); // Set background color
-        sendButton.setForeground(Color.WHITE); // Set text color
-        sendButton.setFont(new Font("Arial", Font.BOLD, 14)); // Set font
-
-        bottomPanel.add(userInputField, BorderLayout.CENTER);
-        bottomPanel.add(recipientComboBox, BorderLayout.WEST);
-        bottomPanel.add(sendButton, BorderLayout.EAST);
-        bottomPanel.setBackground(Color.white);
-
-        // Add components to the chat panel
-        chatPanel.add(topPanel, BorderLayout.NORTH);
-        chatPanel.add(chatScrollPane, BorderLayout.CENTER);
-        chatPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-
-
-        // Add chatPanel to the frame
-        mainFrame.add(chatPanel);
-
+        // Create new instance of the ChatPage class and passes the mainFrame as an argument to its constructor
+        chatPage = new ChatPage(mainFrame);
+        // This means that the chatPage will be displayed as a component within the mainFrame
+        mainFrame.add(chatPage);
+        // Ensures that the added chatPage component is properly laid out within the frame
         mainFrame.revalidate();
+        // Forces the frame to be repainted on the screen, ensuring that any changes/updates made to the frame or its components are immediately visible to the user
         mainFrame.repaint();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new ChatApp();
+    // This class is responsible for creating a panel with a background image
+    class BackgroundPanel extends JPanel {
+
+        // This variable "backgroundImage" stores the loaded background image
+        private BufferedImage backgroundImage;
+
+        // Inside the constructor, the image is loaded and if an exception occurs, it is printed to the console
+        public BackgroundPanel(String imagePath) {
+            try {
+                backgroundImage = ImageIO.read(getClass().getResource(imagePath));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
-    }
-}
-
-class BackgroundPanel extends JPanel {
-    private BufferedImage backgroundImage;
-
-    public BackgroundPanel(String imagePath) {
-        try {
-            backgroundImage = ImageIO.read(getClass().getResource(imagePath));
-        } catch (IOException e) {
-            e.printStackTrace();
+            // Make the panel opaque, which allows the background image to be visible
+            setOpaque(true);
         }
-        setOpaque(true);
-    }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        // Scale the image to fit the panel's dimensions
-        Image scaledImage = backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
-        g.drawImage(scaledImage, 0, 0, this);
+        @Override
+        protected void paintComponent(Graphics g) {
+            // This line invokes the superclass's paintComponent() method to ensure that the panel is painted correctly
+            super.paintComponent(g);
+            // Scale the image to fit the panel's dimensions
+            Image scaledImage = backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+            // Specifies the coordinates (0, 0) to position the image at the top-left corner of the panel
+            g.drawImage(scaledImage, 0, 0, this);
+        }
     }
 }
