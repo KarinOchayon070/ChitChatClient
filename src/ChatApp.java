@@ -75,11 +75,56 @@ public class ChatApp {
 
     private void openChatPage() {
         mainFrame.getContentPane().removeAll();
+        mainFrame.setSize(800, 800);
 
         // Create the chat page components
-        JPanel chatPanel = new JPanel();
-        JLabel chatLabel = new JLabel("Chat Page");
-        chatPanel.add(chatLabel);
+        JPanel chatPanel = new JPanel(new BorderLayout());
+
+        // Top Panel: Server, Port, Connect, and Disconnect
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        topPanel.setBackground(new Color(252, 220, 229)); // Set background color
+
+        JLabel serverLabel = new JLabel("Server:");
+        JTextField serverField = new JTextField(10);
+
+        JLabel portLabel = new JLabel("Port:");
+        JTextField portField = new JTextField(10);
+
+        JButton connectButton = new JButton("Connect");
+        connectButton.setBackground(new Color(120, 8, 247)); // Set background color
+        connectButton.setForeground(Color.WHITE); // Set text color
+        connectButton.setEnabled(false);
+
+        JButton disconnectButton = new JButton("Disconnect");
+        disconnectButton.setBackground(new Color(120, 8, 247)); // Set background color
+        disconnectButton.setForeground(Color.WHITE); // Set text color
+        disconnectButton.setEnabled(false);
+
+        topPanel.add(serverLabel);
+        topPanel.add(serverField);
+        topPanel.add(portLabel);
+        topPanel.add(portField);
+        topPanel.add(connectButton);
+        topPanel.add(disconnectButton);
+
+        // Middle Panel: Chat Messages
+        JTextArea chatMessagesArea = new JTextArea();
+        chatMessagesArea.setEditable(false);
+        JScrollPane chatScrollPane = new JScrollPane(chatMessagesArea);
+
+        // Bottom Panel: User Input, Recipient ComboBox, and Send Button
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        JTextField userInputField = new JTextField();
+        JComboBox<String> recipientComboBox = new JComboBox<>();
+        JButton sendButton = new JButton("Send");
+        bottomPanel.add(userInputField, BorderLayout.CENTER);
+        bottomPanel.add(recipientComboBox, BorderLayout.WEST);
+        bottomPanel.add(sendButton, BorderLayout.EAST);
+
+        // Add components to the chat panel
+        chatPanel.add(topPanel, BorderLayout.NORTH);
+        chatPanel.add(chatScrollPane, BorderLayout.CENTER);
+        chatPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         // Add chatPanel to the frame
         mainFrame.add(chatPanel);
