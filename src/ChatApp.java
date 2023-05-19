@@ -20,6 +20,9 @@ public class ChatApp {
     // Represents an instance of the ChatPage class. It is used to refer to the chat page panel that is displayed when the user clicks the "Start" button
     private ChatPage chatPage;
 
+    // Added SimpleTCPClient instance
+    private SimpleTCPClient tcpClient;
+
     public ChatApp() {
 
         // Set mainFrame style
@@ -67,14 +70,29 @@ public class ChatApp {
     }
 
 
+
     // This function is responsable for the actual chat page
     private void openChatPage() {
         // Remove all the components from the content pane of the mainFrame JFrame
         mainFrame.getContentPane().removeAll();
         // Resize the window
-        mainFrame.setSize(800, 800);
+        mainFrame.setSize(900, 900);
         // Create new instance of the ChatPage class and passes the mainFrame as an argument to its constructor
         chatPage = new ChatPage(mainFrame);
+        // Create an instance of SimpleTCPClient and establish the connection
+        tcpClient = new SimpleTCPClient();
+        try {
+            tcpClient.connect("127.0.0.1", 1300); // Provide the server IP address and port number here
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(mainFrame, "Failed to connect to the server.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+        chatPage.setTCPClient(tcpClient); // Pass the SimpleTCPClient instance to the ChatPage
+
+
+        backgroundPanel= new BackgroundPanel("images/title.png"); // Provide the path to the new image
+
         // This means that the chatPage will be displayed as a component within the mainFrame
         mainFrame.add(chatPage);
         // Ensures that the added chatPage component is properly laid out within the frame

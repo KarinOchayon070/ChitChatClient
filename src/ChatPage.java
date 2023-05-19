@@ -11,11 +11,18 @@ public class ChatPage extends JPanel {
 
     // Declare a private instance variable named mainFrame of type JFrame
     private JFrame mainFrame;
+    private SimpleTCPClient tcpClient;
+
+    public void setTCPClient(SimpleTCPClient client) {
+        this.tcpClient = client;
+    }
+
 
     public ChatPage(JFrame frame) {
         mainFrame = frame; // Allows the ChatPage instance to have access to the same JFrame object as the calling code
         setLayout(new BorderLayout()); // North, South, East, West, and Center
         setBackground(Color.WHITE); // Make the background to be white
+
 
         // ----------------------------------------------------- TOP PANEL -----------------------------------------------------
 
@@ -28,9 +35,14 @@ public class ChatPage extends JPanel {
         ImageIcon titleIcon = new ImageIcon(getClass().getResource("images/title.png"));
         JLabel titleLabel = new JLabel(titleIcon);
 
-        // Server, Port, Connect, and Disconnect
+        // NickName, Server, Port, Connect, and Disconnect
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         buttonPanel.setBackground(Color.WHITE);
+
+        // NickName
+        JLabel nickNameLabel = new JLabel("NickName:");
+        JTextField nickNameField = new JTextField(10);
+        nickNameField.setBackground(Color.WHITE);
 
         // Server
         JLabel serverLabel = new JLabel("Server:");
@@ -57,6 +69,8 @@ public class ChatPage extends JPanel {
         disconnectButton.setEnabled(false);
 
         // Add the components to the buttonPanel
+        buttonPanel.add(nickNameLabel);
+        buttonPanel.add(nickNameField);
         buttonPanel.add(serverLabel);
         buttonPanel.add(serverField);
         buttonPanel.add(portLabel);
