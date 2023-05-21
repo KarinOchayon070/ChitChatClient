@@ -11,8 +11,9 @@ public class ChatPage extends JPanel {
     private JTextField serverField;
     private JPanel chatContainer;
     private JButton disconnectButton;
-    private JButton sendButton;
     private JButton connectButton;
+    private JButton sendButton;
+    private JTextField recipientInputField;
     private JTextField userInputField;
     private JTextField portField;
     private JTextField nickNameField;
@@ -41,8 +42,10 @@ public class ChatPage extends JPanel {
         public void handleOnSendMessage(ChatPage chatPage) {
             String nickName = chatPage.nickNameField.getText();
             String userInput = chatPage.userInputField.getText();
+            String roomName = chatPage.recipientInputField.getText();
 
-            Message message = new Message(nickName, userInput);
+
+            Message message = new Message(nickName, userInput, roomName);
             chatPage.tcpClient.sendMessage(message);
 
             JTextArea textArea = new JTextArea();
@@ -160,9 +163,10 @@ public class ChatPage extends JPanel {
         userInputField = new JTextField();
         userInputField.setPreferredSize(new Dimension(400, 30));
 
-        JComboBox<String> recipientComboBox = new JComboBox<>();
-        recipientComboBox.setPreferredSize(new Dimension(120, 30));
-        recipientComboBox.setBackground(Color.WHITE);
+        recipientInputField  = new JTextField();
+        recipientInputField.setText("global");
+        recipientInputField.setPreferredSize(new Dimension(120, 30));
+        recipientInputField.setBackground(Color.WHITE);
 
         sendButton = new JButton("Send");
         sendButton.setBackground(new Color(120, 9, 247));
@@ -171,7 +175,7 @@ public class ChatPage extends JPanel {
         sendButton.setFont(new Font("Arial", Font.BOLD, 14));
 
         bottomPanel.add(userInputField, BorderLayout.CENTER);
-        bottomPanel.add(recipientComboBox, BorderLayout.WEST);
+        bottomPanel.add(recipientInputField, BorderLayout.WEST);
         bottomPanel.add(sendButton, BorderLayout.EAST);
 
         add(topPanel, BorderLayout.NORTH);
