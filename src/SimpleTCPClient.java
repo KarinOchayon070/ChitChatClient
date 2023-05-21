@@ -1,39 +1,66 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
 import java.net.Socket;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+
 
 public class SimpleTCPClient {
     private Socket socket;
+    private PrintWriter out;
+    private BufferedReader in;
+    private JPanel chatContainer;
+    private Gson gson = new Gson();
 
-    public void connect(String serverIP, int port) throws IOException {
-        socket = new Socket(serverIP, port);
-        // Perform any additional setup or communication with the server here
+    SimpleTCPClient(String serverIP, int port, JPanel chatContainer) throws IOException {
+        this.chatContainer = chatContainer;
+        this.socket = new Socket(serverIP, port);
+        this.out = new PrintWriter(socket.getOutputStream(), true);
+        this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.startReceivingMessages();
     }
 
-    public static void main(String[] args) {
-        try {
-            Socket socket = new Socket("serverIpAddress", 1300);
-            System.out.println("Connected to server: " + socket.getInetAddress().getHostAddress());
 
-            // Get the input and output streams for reading from and writing to the server
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            OutputStreamWriter writer = new OutputStreamWriter(socket.getOutputStream());
+    public void sendMessage(Message message) {
+        String gson = this.gson.toJson(message);
+        this.out.println(gson);
+    }
 
-            // Send data to the server
-            writer.write("Hello server!\n");
-            writer.flush();
+    public void startReceivingMessages() {
+        Thread receivingThread = new Thread(() -> {
+            try {
+                String json;
+                while ((json = receiveMessage()) != null) {
+                    String finalMessage = json;
 
-            // Receive data from the server
-            String response = reader.readLine();
-            System.out.println("Server response: " + response);
+                    Message message = gson.fromJson(json, Message.class);
 
-            // Close the socket
-            socket.close();
-            System.out.println("Socket closed");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                    SwingUtilities.invokeLater(() -> {
+                        JTextArea textArea = new JTextArea(message.getNickName() + ":" + message.getMessage());
+                        textArea.setBackground(Color.CYAN);
+                        textArea.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+
+                        chatContainer.add(textArea);
+                        chatContainer.revalidate();
+                        chatContainer.repaint();
+                    });
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        receivingThread.start();
+    }
+
+    public String receiveMessage() throws IOException {
+        return this.in.readLine();
+    }
+
+    public void close() throws IOException {
+        this.in.close();
+        this.out.close();
+        this.socket.close();
     }
 }
