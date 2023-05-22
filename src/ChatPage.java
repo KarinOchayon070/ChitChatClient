@@ -7,7 +7,6 @@ public class ChatPage extends JPanel {
 
     private JFrame mainFrame;
     private SimpleTCPClient tcpClient;
-
     private JTextField serverField;
     private JPanel chatContainer;
     private JButton disconnectButton;
@@ -17,82 +16,6 @@ public class ChatPage extends JPanel {
     private JTextField userInputField;
     private JTextField portField;
     private JTextField nickNameField;
-
-    private interface ConnectionState {
-        void handleOnConnect(ChatPage chatPage);
-
-        void handleOnDisconnect(ChatPage chatPage);
-
-        void handleOnSendMessage(ChatPage chatPage);
-    }
-
-    private class ConnectedState implements ConnectionState {
-        @Override
-        public void handleOnConnect(ChatPage chatPage) {
-            // Already connected, do nothing
-        }
-
-        @Override
-        public void handleOnDisconnect(ChatPage chatPage) {
-            chatPage.changeState(new DisconnectedState());
-            chatPage.updateButtonState();
-        }
-
-        @Override
-        public void handleOnSendMessage(ChatPage chatPage) {
-            String nickName = chatPage.nickNameField.getText();
-            String userInput = chatPage.userInputField.getText();
-            String roomName = chatPage.recipientInputField.getText();
-
-
-            Message message = new Message(nickName, userInput, roomName);
-            chatPage.tcpClient.sendMessage(message);
-
-            JTextArea textArea = new JTextArea();
-            textArea.setText(message.getNickName() + ": " + message.getMessage());
-            textArea.setEditable(false);
-            textArea.setBackground(Color.GREEN);
-            textArea.setFont(new Font("Arial", Font.PLAIN, 14));
-            textArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-
-            chatPage.chatContainer.add(textArea);
-            chatPage.chatContainer.revalidate();
-            chatPage.chatContainer.repaint();
-        }
-    }
-
-    private class DisconnectedState implements ConnectionState {
-        @Override
-        public void handleOnConnect(ChatPage chatPage) {
-            if(nickNameField.getText().isEmpty() || serverField.getText().isEmpty() || portField.getText().isEmpty()){
-                JOptionPane.showMessageDialog(chatPage.mainFrame, "Must fill all fields!", " Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            int port = Integer.parseInt(chatPage.portField.getText());
-            String server = chatPage.serverField.getText();
-
-            try {
-                chatPage.tcpClient = new SimpleTCPClient(server, port, chatPage.chatContainer);
-                JOptionPane.showMessageDialog(chatPage.mainFrame, "Connected to server successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                chatPage.changeState(new ConnectedState());
-                chatPage.updateButtonState();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(chatPage.mainFrame, "Failed to connect to the server.", "Connection Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-        @Override
-        public void handleOnDisconnect(ChatPage chatPage) {
-            // Already disconnected, do nothing
-        }
-
-        @Override
-        public void handleOnSendMessage(ChatPage chatPage) {
-            // Cannot send message when disconnected, do nothing
-        }
-    }
-
     private ConnectionState currentState;
 
     public ChatPage(JFrame frame) {
@@ -185,11 +108,11 @@ public class ChatPage extends JPanel {
         updateButtonState();
     }
 
-    private void changeState(ConnectionState newState) {
+    public void changeState(ConnectionState newState) {
         currentState = newState;
     }
 
-    private void updateButtonState() {
+    public void updateButtonState() {
         connectButton.setEnabled(currentState instanceof DisconnectedState);
         disconnectButton.setEnabled(currentState instanceof ConnectedState);
         sendButton.setEnabled(currentState instanceof ConnectedState);
@@ -204,5 +127,40 @@ public class ChatPage extends JPanel {
             frame.pack();
             frame.setVisible(true);
         });
+    }
+
+    public JFrame getMainFrame() {
+        return mainFrame;
+    }
+
+    public SimpleTCPClient getTcpClient() {
+        return tcpClient;
+    }
+
+    public JTextField getServerField() {
+        return serverField;
+    }
+
+    public JPanel getChatContainer() {
+        return chatContainer;
+    }
+
+    public JTextField getRecipientInputField() {
+        return recipientInputField;
+    }
+
+    public JTextField getUserInputField() {
+        return userInputField;
+    }
+
+    public JTextField getPortField() {
+        return portField;
+    }
+
+    public JTextField getNickNameField() {
+        return nickNameField;
+    }
+    public void setTcpClient(SimpleTCPClient tcpClient) {
+        this.tcpClient = tcpClient;
     }
 }
