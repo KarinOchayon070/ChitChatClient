@@ -1,5 +1,5 @@
 import java.io.IOException;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class DisconnectedState implements ConnectionState {
     @Override
@@ -12,6 +12,13 @@ public class DisconnectedState implements ConnectionState {
             JOptionPane.showMessageDialog(chatPage.getMainFrame(), "Must fill all fields!", " Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        JTextField nickNameField = chatPage.getNickNameField();
+        JTextField portField = chatPage.getPortField();
+        JTextField serverField = chatPage.getServerField();
+        nickNameField.setEnabled(false);
+        portField.setEnabled(false);
+        serverField.setEnabled(false);
 
 
         try {

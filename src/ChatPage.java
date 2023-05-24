@@ -55,6 +55,7 @@ public class ChatPage extends JPanel {
         connectButton.setFont(new Font("Arial", Font.BOLD, 14));
         connectButton.addActionListener(e -> currentState.handleOnConnect(this));
 
+
         disconnectButton = new JButton("Disconnect");
         disconnectButton.setBackground(new Color(120, 9, 247));
         disconnectButton.setForeground(Color.WHITE);

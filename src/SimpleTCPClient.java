@@ -22,7 +22,7 @@ public class SimpleTCPClient {
 
         Message connectionMessage = new Message(chatPage.getNickNameField().getText(),
                 "Has joined the chat",
-                chatPage.getRecipientInputField().getText());
+                "global");
 
         this.sendMessage(connectionMessage);
         this.startReceivingMessages();
@@ -38,7 +38,7 @@ public class SimpleTCPClient {
         Thread receivingThread = new Thread(() -> {
             try {
                 String json;
-                while ((json = receiveMessage()) != null) {
+                while (this.socket.isConnected() && (json = receiveMessage()) != null) {
                     Message message = gson.fromJson(json, Message.class);
 
                     SwingUtilities.invokeLater(() -> {
@@ -63,8 +63,8 @@ public class SimpleTCPClient {
     }
 
     public void close() throws IOException {
+        this.socket.close();
         this.in.close();
         this.out.close();
-        this.socket.close();
     }
 }
