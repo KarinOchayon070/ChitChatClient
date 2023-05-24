@@ -12,6 +12,14 @@ public class ConnectedState implements ConnectionState {
 
     @Override
     public void handleOnDisconnect(ChatPage chatPage) {
+
+        JTextField nickNameField = chatPage.getNickNameField();
+        JTextField portField = chatPage.getPortField();
+        JTextField serverField = chatPage.getServerField();
+        nickNameField.setEnabled(true);
+        portField.setEnabled(true);
+        serverField.setEnabled(true);
+
         try{
             chatPage.getTcpClient().close();
             chatPage.changeState(new DisconnectedState());
