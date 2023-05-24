@@ -118,16 +118,6 @@ public class ChatPage extends JPanel {
         sendButton.setEnabled(currentState instanceof ConnectedState);
     }
 
-    // Create a main method to run the program
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Chat Application");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().add(new ChatPage(frame));
-            frame.pack();
-            frame.setVisible(true);
-        });
-    }
 
     public JFrame getMainFrame() {
         return mainFrame;

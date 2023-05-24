@@ -1,19 +1,17 @@
 public class Message {
     private String nickName;
     private String message;
+    private String recipient;
 
-    public String getRoomName() {
-        return roomName;
-    }
-
-    private String roomName;
-
-    public Message(String nickName, String message, String roomName) {
+    public Message(String nickName, String message, String recipient) {
         this.nickName = nickName;
         this.message = message;
-        this.roomName = roomName;
+        this.recipient = recipient;
     }
 
+    public String getRecipient() {
+        return recipient;
+    }
     public String getNickName() {
         return nickName;
     }

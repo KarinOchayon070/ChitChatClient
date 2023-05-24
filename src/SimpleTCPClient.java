@@ -3,7 +3,6 @@ import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 
 
@@ -14,11 +13,18 @@ public class SimpleTCPClient {
     private JPanel chatContainer;
     private Gson gson = new Gson();
 
-    SimpleTCPClient(String serverIP, int port, JPanel chatContainer) throws IOException {
-        this.chatContainer = chatContainer;
+    SimpleTCPClient(String serverIP, int port, ChatPage chatPage) throws IOException {
+        this.chatContainer = chatPage.getChatContainer();
         this.socket = new Socket(serverIP, port);
         this.out = new PrintWriter(socket.getOutputStream(), true);
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+
+        Message connectionMessage = new Message(chatPage.getNickNameField().getText(),
+                "Has joined the chat",
+                chatPage.getRecipientInputField().getText());
+
+        this.sendMessage(connectionMessage);
         this.startReceivingMessages();
     }
 
@@ -33,8 +39,6 @@ public class SimpleTCPClient {
             try {
                 String json;
                 while ((json = receiveMessage()) != null) {
-                    String finalMessage = json;
-
                     Message message = gson.fromJson(json, Message.class);
 
                     SwingUtilities.invokeLater(() -> {
