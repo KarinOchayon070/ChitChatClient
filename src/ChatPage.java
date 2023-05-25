@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ChatPage extends JPanel {
 
@@ -78,7 +80,6 @@ public class ChatPage extends JPanel {
         chatContainer.setLayout(new BoxLayout(chatContainer, BoxLayout.Y_AXIS));
 
         JScrollPane chatScrollPane = new JScrollPane(chatContainer);
-        chatScrollPane.setBackground(Color.WHITE);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setBorder(new EmptyBorder(10, 20, 20, 20));
@@ -117,6 +118,34 @@ public class ChatPage extends JPanel {
         connectButton.setEnabled(currentState instanceof DisconnectedState);
         disconnectButton.setEnabled(currentState instanceof ConnectedState);
         sendButton.setEnabled(currentState instanceof ConnectedState);
+    }
+
+    public void renderMessage(Message message, boolean isSentByMe){
+        String color = isSentByMe ? "#52de7c" : "#52bbde";
+        String containerStyles = "background-color: " + color + "; padding: 5px; line-height: 0.8; margin: 0;";
+        String nickNameAndTimestampStyles = "font-size:8px";
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timestamp = currentDateTime.format(formatter);
+
+        String isPrivateMessage = message.getIsPrivate() ? " (private)" : " (global)";
+
+        String htmlMessage = "<html><div style='" + containerStyles + "'><strong style='" + nickNameAndTimestampStyles + "'>" + message.getNickName() + isPrivateMessage + "</strong><br><font>" + message.getMessage() + "</font><br><em style='" + nickNameAndTimestampStyles + "'>" + timestamp + "</em></div></html>";
+
+        JLabel messageLabel = new JLabel(htmlMessage);
+        messageLabel.setBackground(Color.green);
+        messageLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+
+        if(isSentByMe){
+            messageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        }
+
+
+
+        this.getChatContainer().add(messageLabel);
+        this.getChatContainer().revalidate();
+        this.getChatContainer().repaint();
     }
 
 

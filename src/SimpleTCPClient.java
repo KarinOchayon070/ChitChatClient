@@ -10,11 +10,11 @@ public class SimpleTCPClient {
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-    private JPanel chatContainer;
+    private ChatPage chatPage;
     private Gson gson = new Gson();
 
     SimpleTCPClient(String serverIP, int port, ChatPage chatPage) throws IOException {
-        this.chatContainer = chatPage.getChatContainer();
+        this.chatPage = chatPage;
         this.socket = new Socket(serverIP, port);
         this.out = new PrintWriter(socket.getOutputStream(), true);
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -42,13 +42,8 @@ public class SimpleTCPClient {
                     Message message = gson.fromJson(json, Message.class);
 
                     SwingUtilities.invokeLater(() -> {
-                        JTextArea textArea = new JTextArea(message.getNickName() + ":" + message.getMessage());
-                        textArea.setBackground(Color.CYAN);
-                        textArea.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+                        chatPage.renderMessage(message,false);
 
-                        chatContainer.add(textArea);
-                        chatContainer.revalidate();
-                        chatContainer.repaint();
                     });
                 }
             } catch (IOException e) {

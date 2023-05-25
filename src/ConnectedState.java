@@ -12,7 +12,6 @@ public class ConnectedState implements ConnectionState {
 
     @Override
     public void handleOnDisconnect(ChatPage chatPage) {
-
         JTextField nickNameField = chatPage.getNickNameField();
         JTextField portField = chatPage.getPortField();
         JTextField serverField = chatPage.getServerField();
@@ -36,21 +35,17 @@ public class ConnectedState implements ConnectionState {
     public void handleOnSendMessage(ChatPage chatPage) {
         String nickName = chatPage.getNickNameField().getText();
         String userInput = chatPage.getUserInputField().getText();
-        String roomName = chatPage.getRecipientInputField().getText();
+        String recipient = chatPage.getRecipientInputField().getText();
 
-        Message message = new Message(nickName, userInput, roomName);
+        Message message = new Message(nickName, userInput, recipient);
+
+        if(recipient != "global"){
+            message.setIsPrivate(true);
+        }
+
+
         chatPage.getTcpClient().sendMessage(message);
 
-        JTextArea textArea = new JTextArea();
-        textArea.setText(message.getNickName() + ": " + message.getMessage());
-        textArea.setEditable(false);
-        textArea.setBackground(Color.GREEN);
-        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
-        textArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-
-
-        chatPage.getChatContainer().add(textArea);
-        chatPage.getChatContainer().revalidate();
-        chatPage.getChatContainer().repaint();
+        chatPage.renderMessage(message, true);
     }
 }
