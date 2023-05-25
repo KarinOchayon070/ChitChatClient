@@ -56,6 +56,7 @@ public class ChatPage extends JPanel {
         connectButton.setForeground(Color.WHITE);
         connectButton.setFont(new Font("Arial", Font.BOLD, 14));
         connectButton.addActionListener(e -> currentState.handleOnConnect(this));
+        connectButton.setForeground(Color.WHITE);
 
 
         disconnectButton = new JButton("Disconnect");
@@ -63,6 +64,7 @@ public class ChatPage extends JPanel {
         disconnectButton.setForeground(Color.WHITE);
         disconnectButton.setFont(new Font("Arial", Font.BOLD, 14));
         disconnectButton.addActionListener(e -> currentState.handleOnDisconnect(this));
+        disconnectButton.setForeground(Color.WHITE);
 
         buttonPanel.add(nickNameLabel);
         buttonPanel.add(nickNameField);
@@ -80,13 +82,16 @@ public class ChatPage extends JPanel {
         chatContainer.setLayout(new BoxLayout(chatContainer, BoxLayout.Y_AXIS));
 
         JScrollPane chatScrollPane = new JScrollPane(chatContainer);
+        chatScrollPane.setBackground(Color.white);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setBorder(new EmptyBorder(10, 20, 20, 20));
         bottomPanel.setBackground(Color.WHITE);
 
+
         userInputField = new JTextField();
         userInputField.setPreferredSize(new Dimension(400, 30));
+
 
         recipientInputField  = new JTextField();
         recipientInputField.setText("global");
@@ -98,10 +103,47 @@ public class ChatPage extends JPanel {
         sendButton.addActionListener(e -> currentState.handleOnSendMessage(this));
         sendButton.setForeground(Color.WHITE);
         sendButton.setFont(new Font("Arial", Font.BOLD, 14));
+        sendButton.setForeground(Color.WHITE);
+
+        Color originalColor = sendButton.getBackground(); // Change button background color on hover
+        Color hoverColor = new Color(252, 220, 229); // Pink color
+        sendButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sendButton.setBackground(hoverColor);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sendButton.setBackground(originalColor);
+            }
+        });
+
+        connectButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                connectButton.setBackground(hoverColor);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                connectButton.setBackground(originalColor);
+            }
+        });
+
+        disconnectButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                disconnectButton.setBackground(hoverColor);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                disconnectButton.setBackground(originalColor);
+            }
+        });
 
         bottomPanel.add(userInputField, BorderLayout.CENTER);
         bottomPanel.add(recipientInputField, BorderLayout.WEST);
         bottomPanel.add(sendButton, BorderLayout.EAST);
+        bottomPanel.setBackground(Color.white);
 
         add(topPanel, BorderLayout.NORTH);
         add(chatScrollPane, BorderLayout.CENTER);
@@ -121,7 +163,7 @@ public class ChatPage extends JPanel {
     }
 
     public void renderMessage(Message message, boolean isSentByMe){
-        String color = isSentByMe ? "#52de7c" : "#52bbde";
+        String color = isSentByMe ? "#fcdce5" : "#7808f7";
         String containerStyles = "background-color: " + color + "; padding: 5px; line-height: 0.8; margin: 0;";
         String nickNameAndTimestampStyles = "font-size:8px";
 
@@ -129,9 +171,10 @@ public class ChatPage extends JPanel {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String timestamp = currentDateTime.format(formatter);
 
-        String isPrivateMessage = message.getIsPrivate() ? " (private)" : " (global)";
+        boolean isGlobal = message.getRecipient().equals("global");
+        String isGlobalMessage = isGlobal ? " (global)" : " (private)";
 
-        String htmlMessage = "<html><div style='" + containerStyles + "'><strong style='" + nickNameAndTimestampStyles + "'>" + message.getNickName() + isPrivateMessage + "</strong><br><font>" + message.getMessage() + "</font><br><em style='" + nickNameAndTimestampStyles + "'>" + timestamp + "</em></div></html>";
+        String htmlMessage = "<html><div style='" + containerStyles + "'><strong style='" + nickNameAndTimestampStyles + "'>" + message.getNickName() + isGlobalMessage + "</strong><br><font>" + message.getMessage() + "</font><br><em style='" + nickNameAndTimestampStyles + "'>" + timestamp + "</em></div></html>";
 
         JLabel messageLabel = new JLabel(htmlMessage);
         messageLabel.setBackground(Color.green);

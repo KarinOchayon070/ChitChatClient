@@ -70,7 +70,7 @@ public class StartPage extends JPanel {
         // Remove all the components from the content pane of the mainFrame JFrame
         mainFrame.getContentPane().removeAll();
         // Resize the window
-        mainFrame.setSize(900, 900);
+        mainFrame.setSize(900, 800);
         // Create new instance of the ChatPage class and passes the mainFrame as an argument to its constructor
         chatPage = new ChatPage(mainFrame);
 

@@ -39,11 +39,6 @@ public class ConnectedState implements ConnectionState {
 
         Message message = new Message(nickName, userInput, recipient);
 
-        if(recipient != "global"){
-            message.setIsPrivate(true);
-        }
-
-
         chatPage.getTcpClient().sendMessage(message);
 
         chatPage.renderMessage(message, true);
