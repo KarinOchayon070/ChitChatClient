@@ -3,12 +3,10 @@
    - Dor Uzan, 205890510
 */
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+
 
 public class StartPage extends JPanel {
 
@@ -70,7 +68,7 @@ public class StartPage extends JPanel {
         // Remove all the components from the content pane of the mainFrame JFrame
         mainFrame.getContentPane().removeAll();
         // Resize the window
-        mainFrame.setSize(900, 800);
+        mainFrame.setSize(900, 900);
         // Create new instance of the ChatPage class and passes the mainFrame as an argument to its constructor
         chatPage = new ChatPage(mainFrame);
 

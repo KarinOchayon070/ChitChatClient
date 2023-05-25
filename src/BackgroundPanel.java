@@ -1,3 +1,9 @@
+/* Developers details:
+   - Karin Ochayon, 207797002
+   - Dor Uzan, 205890510
+*/
+
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

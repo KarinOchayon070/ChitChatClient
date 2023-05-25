@@ -1,3 +1,8 @@
+/* Developers details:
+   - Karin Ochayon, 207797002
+   - Dor Uzan, 205890510
+*/
+
 import java.io.IOException;
 import javax.swing.*;
 
@@ -42,5 +47,6 @@ public class DisconnectedState implements ConnectionState {
     @Override
     public void handleOnSendMessage(ChatPage chatPage) {
         // Cannot send message when disconnected, do nothing
+
     }
 }

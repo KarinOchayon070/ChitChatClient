@@ -5,8 +5,6 @@
 
 import javax.swing.*;
 
-
-//test
 public class ChatApp {
 
     // Represents the main frame of the application, which is a window that contains all the graphical components of the user interface

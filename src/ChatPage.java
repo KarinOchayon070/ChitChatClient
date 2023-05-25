@@ -1,12 +1,15 @@
+/* Developers details:
+   - Karin Ochayon, 207797002
+   - Dor Uzan, 205890510
+*/
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ChatPage extends JPanel {
-
     private JFrame mainFrame;
     private SimpleTCPClient tcpClient;
     private JTextField serverField;
@@ -109,8 +112,9 @@ public class ChatPage extends JPanel {
         Color hoverColor = new Color(252, 220, 229); // Pink color
         sendButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                sendButton.setBackground(hoverColor);
-
+                if (currentState instanceof ConnectedState) {
+                    sendButton.setBackground(hoverColor);
+                }
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -120,7 +124,9 @@ public class ChatPage extends JPanel {
 
         connectButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                connectButton.setBackground(hoverColor);
+                if (currentState instanceof DisconnectedState) {
+                    connectButton.setBackground(hoverColor);
+                }
 
             }
 
@@ -131,7 +137,9 @@ public class ChatPage extends JPanel {
 
         disconnectButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                disconnectButton.setBackground(hoverColor);
+                if (currentState instanceof ConnectedState) {
+                    disconnectButton.setBackground(hoverColor);
+                }
 
             }
 
@@ -165,14 +173,14 @@ public class ChatPage extends JPanel {
     public void renderMessage(Message message, boolean isSentByMe){
         String color = isSentByMe ? "#fcdce5" : "#7808f7";
         String containerStyles = "background-color: " + color + "; padding: 5px; line-height: 0.8; margin: 0;";
-        String nickNameAndTimestampStyles = "font-size:8px";
+        String nickNameAndTimestampStyles = "font-size:12px";
 
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String timestamp = currentDateTime.format(formatter);
 
         boolean isGlobal = message.getRecipient().equals("global");
-        String isGlobalMessage = isGlobal ? " (global)" : " (private)";
+        String isGlobalMessage = isGlobal ? " (global):" : " (private):";
 
         String htmlMessage = "<html><div style='" + containerStyles + "'><strong style='" + nickNameAndTimestampStyles + "'>" + message.getNickName() + isGlobalMessage + "</strong><br><font>" + message.getMessage() + "</font><br><em style='" + nickNameAndTimestampStyles + "'>" + timestamp + "</em></div></html>";
 

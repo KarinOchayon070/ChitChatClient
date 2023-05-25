@@ -1,5 +1,9 @@
+/* Developers details:
+   - Karin Ochayon, 207797002
+   - Dor Uzan, 205890510
+*/
+
 import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import com.google.gson.Gson;
 

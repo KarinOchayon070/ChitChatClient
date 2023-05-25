@@ -1,4 +1,8 @@
-import java.awt.*;
+/* Developers details:
+   - Karin Ochayon, 207797002
+   - Dor Uzan, 205890510
+*/
+
 import java.io.IOException;
 import javax.swing.*;
 
@@ -6,10 +10,7 @@ public class ConnectedState implements ConnectionState {
     @Override
     public void handleOnConnect(ChatPage chatPage) {
         // Already connected, do nothing
-
-
     }
-
     @Override
     public void handleOnDisconnect(ChatPage chatPage) {
         JTextField nickNameField = chatPage.getNickNameField();
@@ -40,7 +41,10 @@ public class ConnectedState implements ConnectionState {
         Message message = new Message(nickName, userInput, recipient);
 
         chatPage.getTcpClient().sendMessage(message);
+        chatPage.getUserInputField().setText("");
 
         chatPage.renderMessage(message, true);
+
+
     }
 }
