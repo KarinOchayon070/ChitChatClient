@@ -1,4 +1,5 @@
-/* Developers details:
+package il.ac.hit.chatclient.view;/*
+ Developers details:
    - Karin Ochayon, 207797002
    - Dor Uzan, 205890510
 */
@@ -10,7 +11,7 @@ public class ChatApp {
     // Represents the main frame of the application, which is a window that contains all the graphical components of the user interface
     private JFrame mainFrame;
 
-    // Represents an instance of the StartPage class. It is used to represent the start page panel.
+    // Represents an instance of the il.ac.hit.chatclient.client.StartPage class. It is used to represent the start page panel.
     private StartPage startPage;
     public ChatApp() {
         // Set mainFrame style
@@ -18,7 +19,7 @@ public class ChatApp {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setResizable(false); // Disable window resizing
 
-
+        // Creating a new instance of the il.ac.hit.chatclient.client.StartPage class and assigning it to the startPage variable, with the mainFrame as a parameter
         startPage = new StartPage(mainFrame);
 
         // This means that the chatPage will be displayed as a component within the mainFrame
