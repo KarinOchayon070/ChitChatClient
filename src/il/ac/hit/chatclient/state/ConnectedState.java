@@ -1,11 +1,11 @@
-package il.ac.hit.chatclient.state;/*
+/*
  Developers details:
    - Karin Ochayon, 207797002
    - Dor Uzan, 205890510
 */
 
 /*
-    This file (il.ac.hit.chatclient.state.ConnectedState.java) represents the behavior of the chat application when it is in the connected state.
+    This file (ConnectedState.java) represents the behavior of the chat application when it is in the connected state.
     It handles the events related to connecting, disconnecting, and sending messages.
     - The handleOnConnect method does nothing as the client is already connected.
     - The handleOnDisconnect method enables the necessary input fields, closes the TCP connection, changes the state to disconnected,
@@ -14,9 +14,9 @@ package il.ac.hit.chatclient.state;/*
       sends the message via the TCP client, clears the user input field, and renders the message in the chat interface.
 */
 
+package il.ac.hit.chatclient.state;
 import il.ac.hit.chatclient.view.ChatPage;
 import il.ac.hit.chatclient.objects.Message;
-
 import java.io.IOException;
 import javax.swing.*;
 
@@ -26,7 +26,7 @@ public class ConnectedState implements ConnectionState {
      * Handles the "Connect" event in the connected state
      * This method does nothing as the client is already connected
      *
-     * @param chatPage The il.ac.hit.chatclient.client.ChatPage instance.
+     * @param chatPage The ChatPage instance.
      */
     @Override
     public void handleOnConnect(ChatPage chatPage) {
@@ -39,7 +39,7 @@ public class ConnectedState implements ConnectionState {
      * changes the state to disconnected, and updates the button state
      * Displays an error message if disconnection fails
      *
-     * @param chatPage The il.ac.hit.chatclient.client.ChatPage instance.
+     * @param chatPage The ChatPage instance.
      */
     @Override
     public void handleOnDisconnect(ChatPage chatPage) {
@@ -71,12 +71,12 @@ public class ConnectedState implements ConnectionState {
     }
 
     /**
-     * Handles the "Send il.ac.hit.chatclient.common.Message" event in the connected state
+     * Handles the "Send Message" event in the connected state
      * Retrieves the nickname, user input, and recipient from the input fields
      * creates a message object, sends the message via the TCP client
      * clears the user input field, and renders the message in the chat interface
      *
-     * @param chatPage The il.ac.hit.chatclient.client.ChatPage instance.
+     * @param chatPage The ChatPage instance.
      */
     @Override
     public void handleOnSendMessage(ChatPage chatPage) {

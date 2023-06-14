@@ -1,26 +1,25 @@
-package il.ac.hit.chatclient.view;/*
+/*
  Developers details:
    - Karin Ochayon, 207797002
    - Dor Uzan, 205890510
 */
 
 /*
-    This file (il.ac.hit.chatclient.client.ChatPage.java) defines a JPanel-based chat page component for a chat application,
+    This file (ChatPage.java) defines a JPanel-based chat page component for a chat application,
     providing UI elements such as input fields, buttons, and message rendering.
 */
 
+package il.ac.hit.chatclient.view;
 import il.ac.hit.chatclient.objects.Message;
 import il.ac.hit.chatclient.network.SimpleTCPClient;
 import il.ac.hit.chatclient.state.ConnectedState;
 import il.ac.hit.chatclient.state.ConnectionState;
 import il.ac.hit.chatclient.state.DisconnectedState;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 
 public class ChatPage extends JPanel {
 
@@ -75,7 +74,7 @@ public class ChatPage extends JPanel {
         // Set the background color of the panel to white
         setBackground(Color.WHITE);
 
-        // Set the initial state of the connection to il.ac.hit.chatclient.state.DisconnectedState
+        // Set the initial state of the connection to DisconnectedState
         currentState = new DisconnectedState();
 
         // Create a panel for the top section of the chat page, using BorderLayout
@@ -252,7 +251,7 @@ public class ChatPage extends JPanel {
         // Add mouse listener to the sendButton to change its background color on mouse hover
         sendButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                // Check if the current state is il.ac.hit.chatclient.state.ConnectedState
+                // Check if the current state is ConnectedState
                 if (currentState instanceof ConnectedState) {
                     // Change the background color of sendButton to the hover color
                     sendButton.setBackground(hoverColor);
@@ -266,7 +265,7 @@ public class ChatPage extends JPanel {
         // Add mouse listener to the connectButton to change its background color on mouse hover
         connectButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                // Check if the current state is il.ac.hit.chatclient.state.DisconnectedState
+                // Check if the current state is DisconnectedState
                 if (currentState instanceof DisconnectedState) {
                     // Change the background color of connectButton to the hover color
                     connectButton.setBackground(hoverColor);
@@ -280,7 +279,7 @@ public class ChatPage extends JPanel {
         // Add mouse listener to the disconnectButton to change its background color on mouse hover
         disconnectButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                // Check if the current state is il.ac.hit.chatclient.state.ConnectedState
+                // Check if the current state is ConnectedState
                 if (currentState instanceof ConnectedState) {
                     // Change the background color of disconnectButton to the hover color
                     disconnectButton.setBackground(hoverColor);

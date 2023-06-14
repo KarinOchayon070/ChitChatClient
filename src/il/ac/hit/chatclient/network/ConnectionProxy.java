@@ -1,17 +1,19 @@
-package il.ac.hit.chatclient.network;/*
+/*
  Developers details:
    - Karin Ochayon, 207797002
    - Dor Uzan, 205890510
 */
 
 /*
-    This file (il.ac.hit.chatclient.network.ConnectionProxy.java) defines a il.ac.hit.chatclient.network.ConnectionProxy class that facilitates communication with a server over a socket connection.
+    This file (ConnectionProxy.java) defines a ConnectionProxy class that facilitates communication with a server over a socket connection.
     - The constructor initializes a socket connection with the specified server IP and port, and creates the necessary input and output streams.
     - The sendMessage method sends a message to the server by writing it to the output stream.
     - The receiveMessage method reads a message from the server by reading from the input stream.
     - The isConnected method checks if the socket connection is currently open.
     - The close method closes the socket connection and releases associated resources.
  */
+
+package il.ac.hit.chatclient.network;
 
 import java.io.BufferedReader;
 import java.io.IOException;

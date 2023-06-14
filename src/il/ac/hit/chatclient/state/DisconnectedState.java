@@ -1,21 +1,21 @@
-package il.ac.hit.chatclient.state;/*
+/*
  Developers details:
    - Karin Ochayon, 207797002
    - Dor Uzan, 205890510
 */
 
 /*
-    This file (il.ac.hit.chatclient.state.DisconnectedState.java) defines the il.ac.hit.chatclient.state.DisconnectedState class, which is responsible for handling events and actions when
-    the chat application is in the disconnected state. It implements the il.ac.hit.chatclient.state.ConnectionState interface.
-    - In the handleOnConnect method, it retrieves the server IP, port, and nickname from the input fields in the il.ac.hit.chatclient.client.ChatPage instance.
+    This file (DisconnectedState.java) defines the DisconnectedState class, which is responsible for handling events and actions when
+    the chat application is in the disconnected state. It implements the ConnectionState interface.
+    - In the handleOnConnect method, it retrieves the server IP, port, and nickname from the input fields in the ChatPage instance.
       It validates the input, disables the input fields, creates a new TCP client, establishes a connection to the server, and updates the state to connected.
     - The handleOnDisconnect method does nothing because the chat application is already in the disconnected state.
     - The handleOnSendMessage method also does nothing because messages cannot be sent when the application is disconnected.
  */
 
+package il.ac.hit.chatclient.state;
 import il.ac.hit.chatclient.network.SimpleTCPClient;
 import il.ac.hit.chatclient.view.ChatPage;
-
 import java.io.IOException;
 import javax.swing.*;
 

@@ -1,16 +1,21 @@
-package il.ac.hit.chatclient.view;/*
+/*
  Developers details:
    - Karin Ochayon, 207797002
    - Dor Uzan, 205890510
 */
 
+/*
+    This file (BackgroundPanel.java) defines a custom BackgroundPanel class that extends the JPanel class from the Swing framework in Java.
+     This class is used to create a panel with a background image.
+ */
+
+package il.ac.hit.chatclient.view;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-// This class is responsible for creating a panel with a background image
 class BackgroundPanel extends JPanel {
 
     // This variable "backgroundImage" stores the loaded background image

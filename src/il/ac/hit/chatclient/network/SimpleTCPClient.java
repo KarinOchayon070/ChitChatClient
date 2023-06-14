@@ -1,17 +1,18 @@
-package il.ac.hit.chatclient.network;/*
+/*
  Developers details:
    - Karin Ochayon, 207797002
    - Dor Uzan, 205890510
 */
 
 /*
-    This file (il.ac.hit.chatclient.network.SimpleTCPClient.java) defines a il.ac.hit.chatclient.network.SimpleTCPClient class responsible for establishing a TCP connection with a server and exchanging messages.
-    It utilizes the il.ac.hit.chatclient.network.ConnectionProxy class for managing the low-level socket operations.
+    This file (SimpleTCPClient.java) defines a SimpleTCPClient class responsible for establishing a TCP connection with a server and exchanging messages.
+    It utilizes the ConnectionProxy class for managing the low-level socket operations.
     The class allows sending messages to the server, receiving messages asynchronously in a separate thread, and closing the connection.
     It uses the Gson library for converting messages to JSON format and vice versa.
     The received messages are rendered in the chat interface using SwingUtilities.invokeLater().
  */
 
+package il.ac.hit.chatclient.network;
 import javax.swing.*;
 import java.io.*;
 import com.google.gson.Gson;
@@ -20,10 +21,10 @@ import il.ac.hit.chatclient.objects.Message;
 
 public class SimpleTCPClient {
 
-    // Instance of the il.ac.hit.chatclient.network.ConnectionProxy class for managing the TCP connection
+    // Instance of the ConnectionProxy class for managing the TCP connection
     private ConnectionProxy connectionProxy;
 
-    // Instance of the il.ac.hit.chatclient.client.ChatPage class for accessing the chat interface
+    // Instance of the ChatPage class for accessing the chat interface
     private ChatPage chatPage;
 
     // Gson object for converting messages to JSON format and vice versa
@@ -39,18 +40,18 @@ public class SimpleTCPClient {
      */
     public SimpleTCPClient(String serverIP, int port, ChatPage chatPage) throws IOException {
 
-        // Assigns the provided il.ac.hit.chatclient.client.ChatPage instance to the member variable chatPage
+        // Assigns the provided ChatPage instance to the member variable chatPage
         this.chatPage = chatPage;
 
-        // Creates a new il.ac.hit.chatclient.network.ConnectionProxy object using the provided server IP and port
+        // Creates a new ConnectionProxy object using the provided server IP and port
         this.connectionProxy = new ConnectionProxy(serverIP, port);
 
-        // Creates a new il.ac.hit.chatclient.common.Message object representing the connection message, with the nickname, a predefined joining message, and recipient set to "global"
+        // Creates a new Message object representing the connection message, with the nickname, a predefined joining message, and recipient set to "global"
         Message connectionMessage = new Message(chatPage.getNickNameField().getText(),
                 "Has joined the chat",
                 "global");
 
-        // Sends the connection message to the server using the sendMessage() method of the il.ac.hit.chatclient.network.ConnectionProxy
+        // Sends the connection message to the server using the sendMessage() method of the ConnectionProxy
         this.sendMessage(connectionMessage);
 
         // Starts a new thread for receiving messages from the server using the startReceivingMessages() method
@@ -64,10 +65,10 @@ public class SimpleTCPClient {
      */
     public void sendMessage(Message message) {
 
-        // Converts the provided il.ac.hit.chatclient.common.Message object to its JSON representation using the Gson library, and assigns it to the variable gson
+        // Converts the provided Message object to its JSON representation using the Gson library, and assigns it to the variable gson
         String gson = this.gson.toJson(message);
 
-        // Sends the JSON message to the server using the sendMessage() method of the il.ac.hit.chatclient.network.ConnectionProxy
+        // Sends the JSON message to the server using the sendMessage() method of the ConnectionProxy
         this.connectionProxy.sendMessage(gson);
     }
 
@@ -79,7 +80,7 @@ public class SimpleTCPClient {
             try {
                 String json;
                 while (this.connectionProxy.isConnected() && (json = this.connectionProxy.receiveMessage()) != null) {
-                    // Deserializes the received JSON message into a il.ac.hit.chatclient.common.Message object using the Gson library
+                    // Deserializes the received JSON message into a Message object using the Gson library
                     Message message = gson.fromJson(json, Message.class);
                     System.out.println(message);
 
