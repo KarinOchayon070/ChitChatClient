@@ -2,8 +2,10 @@
 
 Het there 👋
 
-"ChitChat" App is a TCP/IP based Client-Server application that allows multiple clients to chat with each other. It provides a user-friendly GUI developed in Java Swing.
-This repository is the client side of the application, if you want, this is the repository to the server side - https://github.com/KarinOchayon070/ChitChatServer.git.
+💻 "ChitChat" App is a TCP/IP based Client-Server application that allows multiple clients to chat with each other.
+💻  It provides a user-friendly GUI developed in Java Swing.
+💻  This repository is the client side of the application, if you want, this is the repository to the server side - https://github.com/KarinOchayon070/ChitChatServer.git.
+💻  Checkout our explanotory video on YouTube - https://www.youtube.com/watch?v=xpIKM1Jrr24&t=1s&ab_channel=KarinOchayon.
 
 ## Features 🌿
 
@@ -32,7 +34,6 @@ This repository is the client side of the application, if you want, this is the 
 - To send a private direct message to a specific participant, prefix your message with "@username" (e.g., "@john Hi, how are you?").
 - To send a message to all participants, simply type your message without any prefix (the deafult is the global room).
 
-Checkout our explanotory video on YouTube 💻 - https://www.youtube.com/watch?v=xpIKM1Jrr24&t=1s&ab_channel=KarinOchayon.
 
 ![image](https://github.com/KarinOchayon070/ChitChatClient/assets/92684210/0cc9115b-4703-4d1b-b188-2dc6fa460ef1)
 ![image](https://github.com/KarinOchayon070/ChitChatClient/assets/92684210/9fa12a0c-e66c-4e9b-9fd6-8f924257aa41)
