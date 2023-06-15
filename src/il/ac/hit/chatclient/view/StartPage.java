@@ -46,6 +46,10 @@ public class StartPage extends JPanel {
 
         // Creating "Start" button
         JButton startButton = new JButton("Start");
+        /* According to what was learned in the lecture, the Observers design pattern is already implemented in Java.
+           For example - the use here of "addActionListener".
+           (ie Java implemented it behind the scenes).
+         */
         startButton.addActionListener(e -> openChatPage()); // When the user clicks on "Start" transfer him to the actual chat page
 
         // Set "Start" button styles

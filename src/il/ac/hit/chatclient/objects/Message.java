@@ -18,10 +18,10 @@ public class Message {
     private String recipient;
 
     /**
-     * Constructor for creating a Message object with the specified nickname, message, and recipient.
-     * @param nickName The nickname of the sender.
-     * @param message The content of the message.
-     * @param recipient The recipient of the message.
+     * Constructor for creating a Message object with the specified nickname, message, and recipient
+     * @param nickName The nickname of the sender
+     * @param message The content of the message
+     * @param recipient The recipient of the message
      */
     public Message(String nickName, String message, String recipient) {
         this.nickName = nickName;
@@ -30,24 +30,24 @@ public class Message {
     }
 
     /**
-     * Retrieves the recipient of the message.
-     * @return The recipient of the message.
+     * Retrieves the recipient of the message
+     * @return The recipient of the message
      */
     public String getRecipient() {
         return recipient;
     }
 
     /**
-     * Retrieves the nickname of the sender.
-     * @return The nickname of the sender.
+     * Retrieves the nickname of the sender
+     * @return The nickname of the sender
      */
     public String getNickName() {
         return nickName;
     }
 
     /**
-     * Retrieves the content of the message.
-     * @return The content of the message.
+     * Retrieves the content of the message
+     * @return The content of the message
      */
     public String getMessage() {
         return message;

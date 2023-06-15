@@ -144,6 +144,10 @@ public class ChatPage extends JPanel {
         connectButton.setFont(new Font("Arial", Font.BOLD, 14));
 
         // Add an action listener to the "Connect" button to handle the connect event
+        /* According to what was learned in the lecture, the Observers design pattern is already implemented in Java.
+           For example - the use here of "addActionListener".
+           (ie Java implemented it behind the scenes).
+         */
         connectButton.addActionListener(e -> currentState.handleOnConnect(this));
 
         // Set the text color of the "Connect" button to white
@@ -162,6 +166,10 @@ public class ChatPage extends JPanel {
         disconnectButton.setFont(new Font("Arial", Font.BOLD, 14));
 
         // Add an action listener to the "Disconnect" button to handle the disconnect event
+        /* According to what was learned in the lecture, the Observers design pattern is already implemented in Java.
+           For example - the use here of "addActionListener".
+           (ie Java implemented it behind the scenes).
+         */
         disconnectButton.addActionListener(e -> currentState.handleOnDisconnect(this));
 
         // Set the text color of the "Disconnect" button to white
@@ -231,6 +239,10 @@ public class ChatPage extends JPanel {
         sendButton.setBackground(new Color(120, 9, 247));
 
         // Add an action listener to the "Send" button to handle sending messages
+        /* According to what was learned in the lecture, the Observers design pattern is already implemented in Java.
+           For example - the use here of "addActionListener".
+           (ie Java implemented it behind the scenes).
+         */
         sendButton.addActionListener(e -> currentState.handleOnSendMessage(this));
 
         // Set the text color of the "Send" button to white

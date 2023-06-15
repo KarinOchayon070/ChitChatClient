@@ -31,11 +31,11 @@ public class SimpleTCPClient {
     private Gson gson = new Gson();
 
     /**
-     * Constructs a il.ac.hit.chatclient.network.SimpleTCPClient object and establishes a connection with the server
+     * Constructs a SimpleTCPClient object and establishes a connection with the server
      *
      * @param serverIP  The server IP address
      * @param port      The port number
-     * @param chatPage  The il.ac.hit.chatclient.client.ChatPage instance
+     * @param chatPage  The ChatPage instance
      * @throws IOException If an I/O error occurs when creating the connection
      */
     public SimpleTCPClient(String serverIP, int port, ChatPage chatPage) throws IOException {
