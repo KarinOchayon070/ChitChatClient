@@ -2,10 +2,10 @@
 
 Het there 👋
 
-💻 "ChitChat" App is a TCP/IP based Client-Server application that allows multiple clients to chat with each other.
-💻  It provides a user-friendly GUI developed in Java Swing.
-💻  This repository is the client side of the application, if you want, this is the repository to the server side - https://github.com/KarinOchayon070/ChitChatServer.git.
-💻  Checkout our explanotory video on YouTube - https://www.youtube.com/watch?v=xpIKM1Jrr24&t=1s&ab_channel=KarinOchayon.
+- 💻 "ChitChat" App is a TCP/IP based Client-Server application that allows multiple clients to chat with each other.
+- 💻  It provides a user-friendly GUI developed in Java Swing.
+- 💻  This repository is the client side of the application, if you want, this is the repository to the server side - https://github.com/KarinOchayon070/ChitChatServer.git.
+- 💻  Checkout our explanotory video on YouTube - https://www.youtube.com/watch?v=xpIKM1Jrr24&t=1s&ab_channel=KarinOchayon.
 
 ## Features 🌿
 
