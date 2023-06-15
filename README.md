@@ -31,3 +31,9 @@ This repository is the client side of the application, if you want, this is the 
 - To send a message, type your message in the chat input box at the bottom and press on the "Send" button.
 - To send a private direct message to a specific participant, prefix your message with "@username" (e.g., "@john Hi, how are you?").
 - To send a message to all participants, simply type your message without any prefix (the deafult is the global room).
+
+Checkout our explanotory video on YouTube - https://www.youtube.com/watch?v=xpIKM1Jrr24&t=1s&ab_channel=KarinOchayon.
+
+![image](https://github.com/KarinOchayon070/ChitChatClient/assets/92684210/0cc9115b-4703-4d1b-b188-2dc6fa460ef1)
+![image](https://github.com/KarinOchayon070/ChitChatClient/assets/92684210/9fa12a0c-e66c-4e9b-9fd6-8f924257aa41)
+
