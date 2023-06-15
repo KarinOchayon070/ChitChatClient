@@ -1,11 +1,11 @@
-# ChitChatClient
+# 💬 ChitChatClient 🗨️
 
-Het there!
+Het there 👋
 
 "ChitChat" App is a TCP/IP based Client-Server application that allows multiple clients to chat with each other. It provides a user-friendly GUI developed in Java Swing.
 This repository is the client side of the application, if you want, this is the repository to the server side - https://github.com/KarinOchayon070/ChitChatServer.git.
 
-## Features
+## Features 🌿
 
 - Real-time chat between multiple clients connected to the server.
 - Ability to send private direct messages to specific participants.
@@ -15,7 +15,7 @@ This repository is the client side of the application, if you want, this is the 
 - Command pattern used for sending messages to all participants or privately.
 - Server-side implements the Iterator design pattern using the java.util.Iterator interface.
 
-## Design Patterns
+## Design Patterns ✔️
 
 - Proxy: The Socket objects on both the server and client sides are surrogated using the Proxy design pattern.
 - Composite: The client's GUI is developed using Swing and implements the Composite design pattern.
@@ -24,7 +24,7 @@ This repository is the client side of the application, if you want, this is the 
 - Command: Sending messages to specific participants or all participants is implemented using the Command pattern.
 - Iterator: The server-side indirectly implements the Iterator design pattern using the java.util.Iterator interface.
 
-## Usage
+## Usage 👥
 
 - Enter the IP address of the server, the port number (1300 by default) and your nickName.
 - Once connected to the server, you can start participating in the chat.
@@ -32,7 +32,7 @@ This repository is the client side of the application, if you want, this is the 
 - To send a private direct message to a specific participant, prefix your message with "@username" (e.g., "@john Hi, how are you?").
 - To send a message to all participants, simply type your message without any prefix (the deafult is the global room).
 
-Checkout our explanotory video on YouTube - https://www.youtube.com/watch?v=xpIKM1Jrr24&t=1s&ab_channel=KarinOchayon.
+Checkout our explanotory video on YouTube 💻 - https://www.youtube.com/watch?v=xpIKM1Jrr24&t=1s&ab_channel=KarinOchayon.
 
 ![image](https://github.com/KarinOchayon070/ChitChatClient/assets/92684210/0cc9115b-4703-4d1b-b188-2dc6fa460ef1)
 ![image](https://github.com/KarinOchayon070/ChitChatClient/assets/92684210/9fa12a0c-e66c-4e9b-9fd6-8f924257aa41)
