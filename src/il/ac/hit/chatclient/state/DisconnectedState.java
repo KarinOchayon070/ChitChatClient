@@ -20,6 +20,16 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class DisconnectedState implements ConnectionState {
+
+    /**
+     * Handles the connect event when the chat application is in the disconnected state
+     * Retrieves the server IP, port, and nickname from the input fields, validates the input
+     * disables the input fields, creates a new TCP client, establishes a connection to the server
+     * and updates the state to connected
+     *
+     * @param chatPage The ChatPage instance
+     */
+
     @Override
     public void handleOnConnect(ChatPage chatPage) {
         // Get the port, server, and nickname from the input fields
@@ -60,11 +70,23 @@ public class DisconnectedState implements ConnectionState {
         }
     }
 
+    /**
+     * Handles the event when the Disconnect button is clicked in the ChatPage
+     * Since the chat application is already in the disconnected state, no action is needed
+     *
+     * @param chatPage The ChatPage instance
+     */
     @Override
     public void handleOnDisconnect(ChatPage chatPage) {
         // Already disconnected, do nothing
     }
 
+    /**
+     * Handles the event when the Send button is clicked in the ChatPage
+     * Since the application is disconnected, messages cannot be sent, so no action is needed
+     *
+     * @param chatPage The ChatPage instance
+     */
     @Override
     public void handleOnSendMessage(ChatPage chatPage) {
         // Cannot send message when disconnected, do nothing

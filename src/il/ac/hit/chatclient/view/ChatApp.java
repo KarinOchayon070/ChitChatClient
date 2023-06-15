@@ -1,4 +1,4 @@
-package il.ac.hit.chatclient.view;/*
+/*
  Developers details:
    - Karin Ochayon, 207797002
    - Dor Uzan, 205890510
@@ -11,6 +11,7 @@ package il.ac.hit.chatclient.view;/*
     It initializes and adds a StartPage component to the main frame, ensuring proper layout, and forces the frame to be repainted for immediate visibility to the user.
  */
 
+package il.ac.hit.chatclient.view;
 import javax.swing.*;
 
 public class ChatApp {
@@ -20,6 +21,10 @@ public class ChatApp {
 
     // Represents an instance of the StartPage class. It is used to represent the start page panel.
     private StartPage startPage;
+
+    /**
+     * Constructs a ChatApp object and initializes the main frame, sets its style, and adds the StartPage component
+     */
     public ChatApp() {
         // Set mainFrame style
         mainFrame = new JFrame("Welcome To ChitChat App 😊");

@@ -13,8 +13,14 @@
 
 package il.ac.hit.chatclient.objects;
 public class Message {
+
+    // The private field to store the nickname of the sender
     private String nickName;
+
+    // The private field to store the content of the message
     private String message;
+
+    // The private field to store the recipient of the message
     private String recipient;
 
     /**
